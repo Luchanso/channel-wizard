@@ -1,9 +1,12 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
 export default (request: VercelRequest, response: VercelResponse) => {
-  const result = {
+  const data = JSON.stringify({
     body: request.body,
     query: request.query
-  }
-  response.status(200).send(JSON.stringify(result, null, 2));
+  }, null, 2);
+
+  console.log(data);
+
+  response.status(200).send(JSON.stringify(data, null, 2));
 };
