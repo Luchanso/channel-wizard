@@ -4,10 +4,13 @@ import { OK } from "../constants/constants";
 
 export const checkAuth = (request: VercelRequest, response: VercelResponse, publicKey: string) => {
   const body = request.body;
-  const signature = request.headers['X-Signature-Ed25519'] as string;
-  const timestamp = request.headers['X-Signature-Timestamp'] as string;
+  console.log(request.headers);
+  const signature = request.headers['x-signature-ed25519'] as string;
+  const timestamp = request.headers['x-signature-timestamp'] as string;
+
 
   if (!signature || !timestamp) {
+    console.log('checkAuth not found headers - 400');
     return response.status(400).end();
   }
 
