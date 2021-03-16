@@ -6,6 +6,8 @@ import { isInteractiveBody } from "./types/types";
 export default (request: VercelRequest, response: VercelResponse) => {
   const PUBLIC_KEY = process.env.PUBLIC_KEY;
 
+  console.log(request.body);
+
   if (checkAuth(request, response, PUBLIC_KEY) !== OK) {
     return;
   }
