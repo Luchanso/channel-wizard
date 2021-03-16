@@ -3,7 +3,7 @@ import nacl from 'tweetnacl';
 import { OK } from "../constants/constants";
 
 export const checkAuth = (request: VercelRequest, response: VercelResponse, publicKey: string) => {
-  const body = request.body;
+  const body = JSON.stringify(request.body);
   const signature = request.headers['x-signature-ed25519'] as string;
   const timestamp = request.headers['x-signature-timestamp'] as string;
 
