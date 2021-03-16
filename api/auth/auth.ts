@@ -3,11 +3,10 @@ import nacl from 'tweetnacl';
 import { OK } from "../constants/constants";
 
 export const checkAuth = (request: VercelRequest, response: VercelResponse, publicKey: string) => {
-  const body = request.body;
+  const body = request.body.toString();
   console.log(request.headers);
   const signature = request.headers['x-signature-ed25519'] as string;
   const timestamp = request.headers['x-signature-timestamp'] as string;
-
 
   if (!signature || !timestamp) {
     console.log('checkAuth not found headers - 400');
@@ -19,6 +18,7 @@ export const checkAuth = (request: VercelRequest, response: VercelResponse, publ
     Buffer.from(signature, 'hex'),
     Buffer.from(publicKey, 'hex')
   )) {
+    console.log('checkAuth invalid request signature - 401');
     return response.status(401).end('invalid request signature');
   }
 
