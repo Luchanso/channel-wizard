@@ -4,7 +4,6 @@ import { OK } from "../constants/constants";
 
 export const checkAuth = (request: VercelRequest, response: VercelResponse, publicKey: string) => {
   const body = request.body;
-  console.log(request.headers);
   const signature = request.headers['X-Signature-Ed25519'] as string;
   const timestamp = request.headers['X-Signature-Timestamp'] as string;
 
