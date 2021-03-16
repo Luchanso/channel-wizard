@@ -14,7 +14,6 @@ export default (request: VercelRequest, response: VercelResponse) => {
   const body = request.body;
 
   console.log('-'.repeat(50));
-  console.log(body);
 
   if (!isInteractiveBody(body)) {
     console.log('isInteractiveBody false - 400 error');
