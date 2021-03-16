@@ -8,6 +8,16 @@ export default (request: VercelRequest, response: VercelResponse) => {
 
   console.log(request.body);
 
+  let test: any = [];
+  request.on('data', (chunk) => {
+    test.push(chunk);
+  }).on('end', () => {
+    test = Buffer.concat(test).toString();
+    // at this point, `body` has the entire request body stored in it as a string
+  });
+  console.log(test);
+
+
   if (checkAuth(request, response, PUBLIC_KEY) !== OK) {
     return;
   }
