@@ -6,7 +6,8 @@ import { isInteractiveBody } from "./types/types";
 export default (request: VercelRequest, response: VercelResponse) => {
   const PUBLIC_KEY = process.env.PUBLIC_KEY;
 
-  console.log(request.body);
+  const temp = JSON.stringify(request.body);
+  console.log(temp);
 
   let test: any = [];
   request.on('data', (chunk) => {
@@ -14,6 +15,7 @@ export default (request: VercelRequest, response: VercelResponse) => {
   }).on('end', () => {
     test = Buffer.concat(test).toString();
     console.log(test);
+    console.log(test === temp);
     response.status(400).send("Unknown command");
     // at this point, `body` has the entire request body stored in it as a string
   });
